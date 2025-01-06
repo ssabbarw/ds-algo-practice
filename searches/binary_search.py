@@ -1,16 +1,16 @@
-def binary_search(sorted_arr, low, high, num):
+def binary_search(sorted_array, left, right, number):
 
-    if low > high:
+    if left > right:
         return -1
 
-    mid_index = (low + high) // 2
+    mid_index = (left + right) // 2
 
-    if sorted_arr[mid_index] == num:
+    if sorted_array[mid_index] == number:
         return mid_index
-    elif sorted_arr[mid_index] > num:
-        return binary_search(sorted_arr, low, mid_index - 1, num)
+    elif sorted_array[mid_index] > number:
+        return binary_search(sorted_array, left, mid_index - 1, number)
     else:
-        return binary_search(sorted_arr, mid_index + 1, high, num)
+        return binary_search(sorted_array, mid_index + 1, right, number)
 
 inputs = [
     ([0,1,2,3,4,5,6,7],0,7,6),
@@ -25,18 +25,18 @@ for user_input in inputs:
     print(f"Number {num} occurs at index {binary_search(sorted_arr,low,high,num)} in arr{sorted_arr}")
 
 print("\nIterative binary search")
-def binary_search_iterative(sorted_array, low, high, num):
+def binary_search_iterative(sorted_array, left, right, number):
 
-    while True:
-        if low > high:
-            return -1
-        mid = (low + high) // 2
-        if num == sorted_array[mid]:
+    while left < right:
+        mid = (left + right) // 2
+        if number == sorted_array[mid]:
             return mid
-        elif num > sorted_array[mid]:
-            low = mid + 1
+        elif number > sorted_array[mid]:
+            left = mid + 1
         else:
-            high = mid - 1
+            right = mid - 1
+
+    return -1
 
 for user_input in inputs:
     sorted_arr, low, high, num = user_input
