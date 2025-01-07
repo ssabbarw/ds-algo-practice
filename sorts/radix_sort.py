@@ -24,7 +24,7 @@ def put_num_in_corresponding_bucket(num, buckets,digit_number):
     add_to_bucket(buckets,digit,num)
 
 def add_to_bucket(buckets, digit, num):
-    node = LinkedListNode(data=num.data,next=None,seq=num.seq)
+    node = LinkedListNode(data=num.data, next=None, seq=num.seq)
     bucket_index = digit
 
     if buckets[bucket_index] is None:
@@ -50,7 +50,7 @@ def get_sorted_array_from_buckets(buckets):
     sorted_array = []
     for node in buckets:
         while node:
-            sorted_array.append(DataObj(data=node.data,seq=node.seq))
+            sorted_array.append(DataObj(data=node.data, seq=node.seq))
             node = node.next
 
     return sorted_array
@@ -63,7 +63,7 @@ class DataObj:
     def __repr__(self):
         return f"data = {self.data}, seq = {self.seq}"
 
-arr = [123, 322, 436, 514, 197]
+arr = [123,322,233,436,514,197]
 
 
 data_arr = [DataObj(data=num, seq=seq) for seq, num in enumerate(arr, start=1)]

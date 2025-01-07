@@ -1,4 +1,4 @@
-class LinkNode:
+class ListNode:
     def __init__(self, data, next=None):
         self.data = data
         self.next = next
@@ -31,7 +31,7 @@ def bucket_sort(arr_to_be_sorted, max_number, min_number, total_numbers):
     print(sorted_numbers)
 
 def add_to_bucket(buckets,bucket_index,number):
-    node = LinkNode(data = number)
+    node = ListNode(data = number)
 
     if not buckets[bucket_index]:
         buckets[bucket_index] = node
