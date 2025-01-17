@@ -1,7 +1,9 @@
 class DisjointSet:
-    def __init__(self):
+    def __init__(self, size):
         self.parent = {}
         self.ranks = {}
+        for i in range(size):
+            self.make_set(i)
 
     def make_set(self, node):
         if node not in self.parent:
