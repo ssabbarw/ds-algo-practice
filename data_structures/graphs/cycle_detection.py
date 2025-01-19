@@ -62,9 +62,6 @@ class Graph:
         visited :Set[int] = set()
         dfs_result: List[int] = []
 
-        if not start:
-            start = next(iter(self.vertices))
-
         for vertex in self.vertices:
             if vertex not in visited:
                 stack.append(vertex)
