@@ -26,7 +26,7 @@ class Graph:
         for vertex in self.vertices:
             print(f"{vertex} => {self.adj_list[vertex]}")
 
-    def check_cycle_bfs(self):
+    def check_cycle_with_bfs(self):
         visited = set()
 
         for vertex in self.vertices:
@@ -77,6 +77,33 @@ class Graph:
 
                 print(dfs_result)
 
+    def check_cycle_with_dfs(self):
+        visited : Set[int] = set()
+        NodeWithParent = namedtuple('CurrentParent', ('current', 'parent'))
+
+        if not self.vertices:
+            print("Graph is empty. No cycles to detect.")
+            return False
+
+        for vertex in self.vertices:
+            if vertex in visited:
+                continue
+            stack :List[int]= [NodeWithParent(vertex,None)]
+
+            while stack:
+                current_node,parent_node = stack.pop()
+
+                if current_node not in visited:
+                    visited.add(current_node)
+
+                for edge in self.adj_list[current_node]:
+                    if edge not in visited:
+                        stack.append(NodeWithParent(edge,current_node))
+                    elif edge != parent_node:
+                        return True
+
+        return False
+
 
 
 
@@ -94,4 +121,4 @@ graph.add_edge(8,9)
 graph.add_edge(9,6)
 
 
-graph.dfs_print()
+print(graph.check_cycle_with_dfs())
