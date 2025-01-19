@@ -26,7 +26,7 @@ class Graph:
         for vertex in self.vertices:
             print(f"{vertex} => {self.adj_list[vertex]}")
 
-    def has_cycle(self):
+    def check_cycle_bfs(self):
         visited = set()
 
         for vertex in self.vertices:
@@ -74,7 +74,7 @@ graph.add_edge(9,6)
 
 
 graph.print_graph()
-print(graph.has_cycle())
+print(graph.check_cycle_bfs())
 
 a = defaultdict(list)
 print(a["a"])
