@@ -36,7 +36,6 @@ class Graph:
 
         return False
 
-
     def bfs_cycle(self, visited, start):
         visited.add(start)
 
@@ -58,11 +57,36 @@ class Graph:
                     q.append(ParentChild(current_vertex, edge_dest))
         return  False
 
+    def dfs_print(self, start = None):
+        stack :List[int]= []
+        visited :Set[int] = set()
+        dfs_result: List[int] = []
+
+        if not start:
+            start = next(iter(self.vertices))
+
+        for vertex in self.vertices:
+            if vertex not in visited:
+                stack.append(vertex)
+                while stack:
+                    current = stack.pop()
+                    if current not in visited:
+                        visited.add(current)
+                        dfs_result.append(current)
+
+                    for edge in self.adj_list[current]:
+                        if edge not in visited:
+                            stack.append(edge)
+
+                print(dfs_result)
+
+
+
 
 graph = Graph()
 graph.add_edge(0,1)
 graph.add_edge(1,3)
-# graph.add_edge(3,4)
+graph.add_edge(3,4)
 graph.add_edge(4,5)
 graph.add_edge(5,7)
 graph.add_edge(7,6)
@@ -73,8 +97,4 @@ graph.add_edge(8,9)
 graph.add_edge(9,6)
 
 
-graph.print_graph()
-print(graph.check_cycle_bfs())
-
-a = defaultdict(list)
-print(a["a"])
+graph.dfs_print()
