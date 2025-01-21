@@ -8,6 +8,10 @@ class MyQueue:
 
 
     def pop(self) -> int:
+        '''
+        time complexity is O(1) amortised
+
+        '''
         if self.empty():
             return None
 
