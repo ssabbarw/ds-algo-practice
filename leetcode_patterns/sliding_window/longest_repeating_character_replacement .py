@@ -25,6 +25,7 @@ def max_length_with_char(s: str, k :int, char: str) -> int:
     return max_length
 
 def character_replacement_with_sliding_window(s: str, k: int) -> int:
+
     left = 0
     freq_counter = defaultdict(int)
     max_length = 0
@@ -35,12 +36,11 @@ def character_replacement_with_sliding_window(s: str, k: int) -> int:
         freq_counter[s[right]] += 1
         current_max_freq = max(current_max_freq, freq_counter[s[right]])
 
-        current_length_of_sub_string = right - left + 1
-        if current_length_of_sub_string - current_max_freq > k:
-            left = left + 1
+        if right - left + 1 - current_max_freq > k:
             freq_counter[s[left]] -= 1
+            left = left + 1
 
-        max_length = max(max_length, current_length_of_sub_string)
+        max_length = max(max_length, right - left + 1)
     return max_length
 
 
@@ -49,4 +49,4 @@ def character_replacement_with_sliding_window(s: str, k: int) -> int:
     # Try for each unique character in the string
     return max(max_length_with_char(s, k, char) for char in set(s))
 
-print("ans", character_replacement_with_sliding_window("AABABBA", 1))
+print("ans", character_replacement_with_sliding_window("ABAB", 0))
