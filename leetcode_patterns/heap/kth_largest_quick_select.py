@@ -2,7 +2,7 @@ from typing import List
 import random
 import heapq
 
-def findKthLargestWithHeap(self, nums: List[int], k: int) -> int:
+def findKthLargestWithHeap(nums: List[int], k: int) -> int:
     heap = []
     for num in nums:
         heapq.heappush(heap, -num)
@@ -10,7 +10,16 @@ def findKthLargestWithHeap(self, nums: List[int], k: int) -> int:
     for _ in range(k):
         result = heapq.heappop(heap)
 
-    return result
+    return -result
+
+def findKthLargestWithHeapOfSizeK(nums: List[int], k: int) -> int:
+    nums = [-num for num in nums]
+    heapq.heapify(nums)
+
+    for _ in range(k):
+        result = heapq.heappop(nums)
+
+    return -result
 
 def findKthLargest(nums: List[int], k: int) -> int:
     if len(nums) == 1:
@@ -30,5 +39,5 @@ def findKthLargest(nums: List[int], k: int) -> int:
 
     return findKthLargest(right, k - len(left) - len(mid))
 
-print(findKthLargest([3,2,1,5,6,4], 2))
+print(findKthLargestWithHeapOfSizeK([3,2,1,5,6,4], 2))
 
