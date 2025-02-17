@@ -1,48 +1,26 @@
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+arr = [2,3,1,4,2]
+arr = sorted(arr,reverse=True)
+arr_sum = 0
 
-def buildTreeIterative(inorder, postorder):
-    """
-    Build a binary tree from inorder and postorder traversal lists using an iterative approach.
+for item in arr:
+    arr_sum += item
 
-    The key idea is to:
-    1. Start from the last element of postorder (root)
-    2. Keep track of current inorder position
-    3. Use a stack to simulate recursion
+curr_count = 0
 
-    Time Complexity: O(n)
-    Space Complexity: O(n)
-    """
-    if not inorder or not postorder:
-        return None
+while arr_sum > curr_count:
+    i = 0
+    temp_count = 0
 
-    # Create the root node from last element of postorder
-    root = TreeNode(postorder[-1])
-    stack = [root]
+    while temp_count < curr_count +1:
+        if arr[i] > 0:
+            arr[i] -= 1
+            temp_count += 1
+        i += 1
+    arr_sum = 0
 
-    # Initialize inorder index to last element
-    inorder_idx = len(inorder) - 1
+    for item in arr:
+        arr_sum += item
 
-    # Process postorder array from right to left
-    # Skip the last element as we've already used it for root
-    for val in reversed(postorder[:-1]):
-        node = TreeNode(val)
-        current = stack[-1]
+    curr_count += 1
 
-        # Case 1: Current value is right child
-        if inorder[inorder_idx] != current.val:
-            current.right = node
-            stack.append(node)
-        # Case 2: Current value is left child of some ancestor
-        else:
-            # Keep popping until we find the correct parent
-            while stack and stack[-1].val == inorder[inorder_idx]:
-                current = stack.pop()
-                inorder_idx -= 1
-            current.left = node
-            stack.append(node)
-
-    return root
+print(curr_count)
