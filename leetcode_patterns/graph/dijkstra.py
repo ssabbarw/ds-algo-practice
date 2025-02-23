@@ -13,6 +13,8 @@ class Solution:
 
         while pq:
             cur_wt, cur, = heapq.heappop(pq)
+            if weights[cur] < cur_wt:
+                continue
 
             for neighbor in adj[cur]:
                 if 1 + cur_wt < weights[neighbor]:  # Relaxation step
